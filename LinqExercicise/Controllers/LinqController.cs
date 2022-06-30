@@ -87,11 +87,65 @@ namespace LinqExercicise.Controllers
         [HttpPost("repetentompa")]
         public ActionResult<int[]> PostRepeteNToMPa([FromBody] int n, int m)
         {
+            IEnumerable<int> list = Enumerable.Range(n - 1, m - 1).Select(x => x + 1);
 
+            return Ok(list);
         }
 
+        #endregion
 
+        #region 5.
+        [HttpPost("actionfive")]
+        public ActionResult<int[]> PostActionFive([FromBody] int[] array)
+        {
+            int sum = array.Sum(x => x);
 
+            int? oddNumbersSum = array.Where(x => x % 2 != 0).Sum(y => y);
+
+            double? evenNumbersAvg = array.Where(x => x % 2 == 0).Count() > 0 ? array.Where(x => x % 2 == 0).Average(y => y) : null;
+
+            int? firstEven = array.FirstOrDefault(x => x % 2 == 0);
+
+            int? lastOdd = array.LastOrDefault(x => x % 2 != 0);
+
+            int[] ascending = array.OrderBy(x => x).ToArray();
+
+            int[] descending = array.OrderByDescending(x => x).ToArray();
+
+            int? minValue = array.Min(x => x);
+
+            int? maxValue = array.Max(x => x);
+
+            bool isAllEven = array.All(x => x % 2 == 0);
+
+            bool isAnyOdd = array.Any(x => x % 2 != 0);
+
+            int[] dinstict = array.Distinct().ToArray();
+
+            int? last = array.LastOrDefault();
+
+            int? first = array.FirstOrDefault();
+
+            int halfIndex = array.Length / 2;
+
+            double? median = array.Length % 2 != 0 ? array.OrderBy(x => x).ElementAt(halfIndex) : (array.OrderBy(x => x).ElementAt(halfIndex) + array.OrderBy(x => x).ElementAt(halfIndex - 1)) / 2.0;
+
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+            char[] chars = alphabet.ToCharArray();
+
+            char[] toLetters = array.Select(number => chars[number > 26 ? (number % 26 == 0 ? 25 : (number - 26 * (number / 26) - 1)) : number - 1]).ToArray();
+
+            int[] toDouble = array.Select(x => x * 2).ToArray();
+
+            byte[] toBits = array.Select(x => x % 2 == 0 ? (byte)1 : (byte)0).ToArray();
+
+            int[][] groupEvenOdds = array.GroupBy(x => x % 2 == 0).Select(arr => arr.Select(x => x).ToArray()).ToArray();
+
+            int Aggregate = array.Aggregate(1, (prev, current) => prev * current);
+
+            return Ok(new {sum, oddNumbersSum, evenNumbersAvg, firstEven, lastOdd, ascending, descending, minValue, maxValue, isAllEven, isAnyOdd, dinstict, last, first, median, toLetters, toDouble, toBits, groupEvenOdds, Aggregate });
+
+        }
 
         #endregion
 
