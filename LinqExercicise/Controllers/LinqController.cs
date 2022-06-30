@@ -174,10 +174,16 @@ namespace LinqExercicise.Controllers
 
         #endregion
 
-        #region 8.
+        //#region 8.
+        //[HttpGet("letteralgumacoisa")]
+        //public ActionResult<object[]> GetLetterObject([FromQuery] string s)
+        //{
+        //    char[] splitedString = s.ToCharArray();
+
+        //}
 
 
-        #endregion
+        //#endregion
 
 
 
