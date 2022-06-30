@@ -149,5 +149,38 @@ namespace LinqExercicise.Controllers
 
         #endregion
 
+        #region 6.
+
+        [HttpPost("juros")]
+        public ActionResult<double[]> PostPortionPrice(double value, int portions, double interestRates)
+        {
+            double valuePriceRate = value * (Math.Pow((1 + interestRates), portions) * interestRates) / (Math.Pow((1 + interestRates), portions) - 1);
+
+            IEnumerable<double> parcelas = Enumerable.Repeat(valuePriceRate, portions);
+
+            return Ok(parcelas);
+            
+        }
+        #endregion
+
+        #region 7.
+
+        [HttpGet("datetime")]
+        public ActionResult<object[]> PostDayAniversy([FromQuery] DateTime date, [FromQuery] int n)
+        {
+            IEnumerable<DateTime> dates = Enumerable.Range(0, n).Select(x => date.AddYears(x));
+            return Ok(dates.Select(date => new { date, weekDay = date.DayOfWeek.ToString() }));
+        }
+
+        #endregion
+
+        #region 8.
+
+
+        #endregion
+
+
+
+
     }
 }
