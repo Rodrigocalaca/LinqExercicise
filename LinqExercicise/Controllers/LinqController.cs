@@ -203,9 +203,10 @@ namespace LinqExercicise.Controllers
         [HttpGet("CountLetter")]
         public ActionResult<object[]> GetLetterObject([FromQuery] string s)
         {
-            char[] splitedString = s.ToLower().ToCharArray();
+            s = s.ToLower();
+            char[] splitedString = s.ToCharArray();
 
-            return Ok(splitedString.Select((x, i) => new { x, count = s.Count(x => x == s[i])}).Distinct());
+            return Ok(splitedString.Select((x, i) => new { character = x, count = s.Count(x => x == s[i])}).Distinct());
         }
 
         #endregion
