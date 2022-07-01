@@ -174,16 +174,19 @@ namespace LinqExercicise.Controllers
 
         #endregion
 
-        //#region 8.
-        //[HttpGet("letteralgumacoisa")]
-        //public ActionResult<object[]> GetLetterObject([FromQuery] string s)
-        //{
-        //    char[] splitedString = s.ToCharArray();
+        #region 8.
+        [HttpGet("CountLetter")]
+        public ActionResult<object[]> GetLetterObject([FromQuery] string s)
+        {
+            char[] splitedString = s.ToCharArray();
 
-        //}
+            return Ok(splitedString.Select((x, i) => new { x, count = s.Count(x => x == s[i])}).Distinct());
 
 
-        //#endregion
+        }
+
+
+        #endregion
 
 
 
